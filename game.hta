@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>贪吃蛇游戏</title>
+    <meta charset="utf-8">
+    <hta:application
+        id="snakeGame"
+        applicationname="贪吃蛇游戏"
+        border="thin"
+        borderstyle="complex"
+        caption="yes"
+        icon="icon.ico"
+        maximizebutton="yes"
+        minimizebutton="yes"
+        showintaskbar="yes"
+        singleinstance="yes"
+        sysmenu="yes"
+        version="1.0"
+        windowstate="normal"
+        innerborder="no"
+    />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+        #gameFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #scoreBoard {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial;
+            z-index: 1000;
+        }
+    </style>
+    <script>
+        // 设置更大的窗口尺寸
+        window.resizeTo(1024, 768);
+        window.moveTo(
+            (screen.width - 1024) / 2,
+            (screen.height - 768) / 2
+        );
+
+        // 加载历史最高分
+        function loadHighScore() {
+            try {
+                const fso = new ActiveXObject("Scripting.FileSystemObject");
+                const filePath = "highscore.txt";
+                if (fso.FileExists(filePath)) {
+                    const file = fso.OpenTextFile(filePath, 1);
+                    const score = parseInt(file.ReadLine()) || 0;
+                    file.Close();
+                    return score;
+                }
+            } catch (e) {
+                console.error("读取分数失败:", e);
+            }
+            return 0;
+        }
+
+        // 保存最高分
+        function saveHighScore(score) {
+            try {
+                const fso = new ActiveXObject("Scripting.FileSystemObject");
+                const file = fso.CreateTextFile("highscore.txt", true);
+                file.WriteLine(score.toString());
+                file.Close();
+            } catch (e) {
+                console.error("保存分数失败:", e);
+            }
+        }
+
+        // 与游戏通信
+        window.addEventListener('message', function(e) {
+            if (e.data.type === 'score') {
+                const currentScore = e.data.score;
+                const highScore = loadHighScore();
+                if (currentScore > highScore) {
+                    saveHighScore(currentScore);
+                }
+                document.getElementById('currentScore').textContent = currentScore;
+                document.getElementById('highScore').textContent = Math.max(currentScore, highScore);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="scoreBoard">
+        <div>当前分数: <span id="currentScore">0</span></div>
+        <div>最高分数: <span id="highScore">0</span></div>
+    </div>
+    <iframe id="gameFrame" src="index.html"></iframe>
+</body>
+</html> 

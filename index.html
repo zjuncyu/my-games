@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇游戏</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            overflow: hidden;
+            -webkit-app-region: no-drag;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        /* 添加诗句样式 */
+        #poemContainer {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            overflow: hidden;
+            z-index: 10000;
+            pointer-events: none;
+        }
+        
+        #poemText {
+            position: absolute;
+            white-space: nowrap;
+            color: #FFD700;  /* 金色文字 */
+            font-size: 24px;
+            font-family: "楷体", KaiTi, serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: scrollPoem 20s linear infinite;
+        }
+        
+        @keyframes scrollPoem {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="poemContainer">
+        <div id="poemText">乙巳青蛇送吉祥，木火相生运更昌，蛇年新岁开鸿运，家国兴旺共安康</div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div class="controls">
+        <button id="startBtn">开始游戏</button>
+        <button id="stopBtn">停止游戏</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 

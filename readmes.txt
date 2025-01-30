@@ -1,0 +1,2 @@
+This is a greedy snake game. It adopts the Chinese Paper Cuttings style design, adding farmers and trees as obstacles to the snake eating. The snake encountered a tree and could not move forward, so it had to detour; If the snake is caught by the farmer, the game ends. But if a snake eats food 5 times, it has the ability to cross trees; If you eat food 10 times, you can gain the ability to be reborn.
+这是一款贪吃蛇小游戏，采取中国剪纸风格设计，增加农夫和树木做为干扰蛇吃食物的障碍。蛇碰见树无法前进，只能绕行；蛇被农夫抓住，则游戏结束。但是蛇如果吃到5次食物，则具备穿越树木的能力；如果吃到10次食物，则能获得重生的能力。
